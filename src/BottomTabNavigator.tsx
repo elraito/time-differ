@@ -7,8 +7,8 @@ const TabNavigator = createBottomTabNavigator();
 export function BottomTabNavigator() {
   return (
     <TabNavigator.Navigator>
-      <TabNavigator.Screen name="TimeInputScreen" component={TimeInputScreen} />
-      <TabNavigator.Screen name="TimeDiffDisplayScreen" component={TimeDiffDisplayScreen} />
+      <TabNavigator.Screen name="Time Input" component={TimeInputScreen} />
+      <TabNavigator.Screen name="Time Difference" component={TimeDiffDisplayScreen} />
     </TabNavigator.Navigator>
   );
 }

@@ -40,22 +40,30 @@ export function TimeDiffDisplayScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>
+      <BlackText>
         {startTime.hours}:{startTime.minutes}
-      </Text>
-      <Text>
+      </BlackText>
+      <BlackText>
         {endTime.hours}:{endTime.minutes}
-      </Text>
-      <Text>Daily time:</Text>
-      <Text>
+      </BlackText>
+      <BlackText>Daily time:</BlackText>
+      <BlackText>
         {dailyTime.hours}:{dailyTime.minutes}
-      </Text>
-      <Text>Nightly time</Text>
-      <Text>
+      </BlackText>
+      <BlackText>Nightly time</BlackText>
+      <BlackText>
         {nightlyTime.hours}:{nightlyTime.minutes}
-      </Text>
+      </BlackText>
     </SafeAreaView>
   );
+}
+
+interface BlackTextProps {
+  children: React.ReactNode;
+}
+
+function BlackText({ children }: BlackTextProps) {
+  return <Text style={styles.text}>{children}</Text>;
 }
 
 const styles = StyleSheet.create({
@@ -64,5 +72,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 8,
+  },
+  text: {
+    color: 'black',
   },
 });
