@@ -13,9 +13,9 @@ export function TimeDiffDisplayScreen() {
     let dayTime = 0;
     let nightTime = 0;
 
-    console.log(startingMinutes, endingMinutes);
+    const isDayBreak = startingMinutes > endingMinutes;
 
-    if (startingMinutes > endingMinutes) {
+    if (isDayBreak) {
       endingMinutes = endingMinutes + 1440;
     }
 
@@ -23,10 +23,18 @@ export function TimeDiffDisplayScreen() {
 
     while (startingMinutes < endingMinutes) {
       startingMinutes = startingMinutes + 15;
-      if (startingMinutes > 360 && startingMinutes <= 1320) {
-        dayTime = dayTime + 15;
+      if (isDayBreak) {
+        if (startingMinutes > 1800 && startingMinutes <= 2760) {
+          dayTime = dayTime + 15;
+        } else {
+          nightTime = nightTime + 15;
+        }
       } else {
-        nightTime = nightTime + 15;
+        if (startingMinutes > 360 && startingMinutes <= 1320) {
+          dayTime = dayTime + 15;
+        } else {
+          nightTime = nightTime + 15;
+        }
       }
     }
 

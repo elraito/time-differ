@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TimeInputScreen } from './screens/TimeInputScreen';
 import { TimeDiffDisplayScreen } from './screens/TimeDiffDisplayScreen';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import HourGlass from './svg/hourglass.svg';
 import InputIcon from './svg/input.svg';
 
@@ -9,7 +9,7 @@ const TabNavigator = createBottomTabNavigator();
 
 export function BottomTabNavigator() {
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
       <TabNavigator.Navigator>
         <TabNavigator.Screen
           name="Time Input"
@@ -25,3 +25,9 @@ export function BottomTabNavigator() {
     </KeyboardAvoidingView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
