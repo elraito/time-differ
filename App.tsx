@@ -1,10 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { BottomTabNavigator } from './src/BottomTabNavigator';
+import { TimeContextProvider } from './src/TimeContext';
 
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <BottomTabNavigator />
+      <TimeContextProvider>
+        <BottomTabNavigator />
+      </TimeContextProvider>
     </NavigationContainer>
   );
 }

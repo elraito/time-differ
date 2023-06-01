@@ -8,10 +8,7 @@ export function BottomTabNavigator() {
   return (
     <TabNavigator.Navigator>
       <TabNavigator.Screen name="TimeInputScreen" component={TimeInputScreen} />
-      <TabNavigator.Screen
-        name="TimeDiffDisplayScreen"
-        component={TimeDiffDisplayScreen}
-      />
+      <TabNavigator.Screen name="TimeDiffDisplayScreen" component={TimeDiffDisplayScreen} />
     </TabNavigator.Navigator>
   );
 }
