@@ -24,7 +24,7 @@ export function TimeDiffDisplayScreen() {
     while (startingMinutes < endingMinutes) {
       startingMinutes = startingMinutes + 15;
       if (isDayBreak) {
-        if (startingMinutes > 1800 && startingMinutes <= 2760) {
+        if (startingMinutes > 1320 && startingMinutes <= 2760) {
           dayTime = dayTime + 15;
         } else {
           nightTime = nightTime + 15;
