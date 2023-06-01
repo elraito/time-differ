@@ -100,8 +100,10 @@ export function TimeInputScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.row}>
         <Text style={styles.text}>Starting time:</Text>
+      </View>
+      <View style={styles.row}>
         <TextInput
-          style={styles.text}
+          style={styles.input}
           defaultValue={startTime.hours.toString()}
           onChange={handleStartHourChange}
           keyboardType="number-pad"
@@ -110,7 +112,7 @@ export function TimeInputScreen() {
         />
         <Text style={styles.text}>:</Text>
         <TextInput
-          style={styles.text}
+          style={styles.input}
           defaultValue={startTime.minutes.toString()}
           onChange={handleStartMinuteChange}
           keyboardType="number-pad"
@@ -120,8 +122,10 @@ export function TimeInputScreen() {
       </View>
       <View style={styles.row}>
         <Text style={styles.text}>Ending time:</Text>
+      </View>
+      <View style={styles.row}>
         <TextInput
-          style={styles.text}
+          style={styles.input}
           defaultValue={endTime.hours.toString()}
           onChange={handleEndHourChange}
           keyboardType="number-pad"
@@ -130,7 +134,7 @@ export function TimeInputScreen() {
         />
         <Text style={styles.text}>:</Text>
         <TextInput
-          style={styles.text}
+          style={styles.input}
           defaultValue={endTime.minutes.toString()}
           onChange={handleEndMinutesChange}
           keyboardType="number-pad"
@@ -166,5 +170,14 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
+    fontSize: 36,
+  },
+  input: {
+    color: 'black',
+    fontSize: 36,
+    margin: 0,
+    padding: 0,
+    alignItems: 'center',
+    textAlign: 'center',
   },
 });

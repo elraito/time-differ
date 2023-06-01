@@ -13,13 +13,17 @@ export function TimeDiffDisplayScreen() {
     let dayTime = 0;
     let nightTime = 0;
 
+    console.log(startingMinutes, endingMinutes);
+
     if (startingMinutes > endingMinutes) {
-      startingMinutes = startingMinutes - 1440;
+      endingMinutes = endingMinutes + 1440;
     }
+
+    console.log(startingMinutes, endingMinutes);
 
     while (startingMinutes < endingMinutes) {
       startingMinutes = startingMinutes + 15;
-      if (startingMinutes > 240 && startingMinutes <= 1320) {
+      if (startingMinutes > 360 && startingMinutes <= 1320) {
         dayTime = dayTime + 15;
       } else {
         nightTime = nightTime + 15;
@@ -46,7 +50,7 @@ export function TimeDiffDisplayScreen() {
       <BlackText>
         {endTime.hours}:{endTime.minutes}
       </BlackText>
-      <BlackText>Daily time:</BlackText>
+      <BlackText>Daily time</BlackText>
       <BlackText>
         {dailyTime.hours}:{dailyTime.minutes}
       </BlackText>
@@ -75,5 +79,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
+    fontSize: 36,
   },
 });
