@@ -99,17 +99,18 @@ export function TimeInputScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.row}>
+        <Text style={styles.text}>Starting time:</Text>
         <TextInput
-          style={styles.input}
+          style={styles.text}
           defaultValue={startTime.hours.toString()}
           onChange={handleStartHourChange}
           keyboardType="number-pad"
           maxLength={2}
           placeholder="HH"
         />
-        <Text>:</Text>
+        <Text style={styles.text}>:</Text>
         <TextInput
-          style={styles.input}
+          style={styles.text}
           defaultValue={startTime.minutes.toString()}
           onChange={handleStartMinuteChange}
           keyboardType="number-pad"
@@ -118,17 +119,18 @@ export function TimeInputScreen() {
         />
       </View>
       <View style={styles.row}>
+        <Text style={styles.text}>Ending time:</Text>
         <TextInput
-          style={styles.input}
+          style={styles.text}
           defaultValue={endTime.hours.toString()}
           onChange={handleEndHourChange}
           keyboardType="number-pad"
           maxLength={2}
           placeholder="HH"
         />
-        <Text>:</Text>
+        <Text style={styles.text}>:</Text>
         <TextInput
-          style={styles.input}
+          style={styles.text}
           defaultValue={endTime.minutes.toString()}
           onChange={handleEndMinutesChange}
           keyboardType="number-pad"
@@ -155,12 +157,14 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 8,
   },
   errorMessage: {
     color: 'red',
   },
-  input: {
+  text: {
     color: 'black',
   },
 });
