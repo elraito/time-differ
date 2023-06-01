@@ -109,6 +109,7 @@ export function TimeInputScreen() {
           keyboardType="number-pad"
           maxLength={2}
           placeholder="HH"
+          placeholderTextColor="gray"
         />
         <Text style={styles.text}>:</Text>
         <TextInput
@@ -118,6 +119,7 @@ export function TimeInputScreen() {
           keyboardType="number-pad"
           maxLength={2}
           placeholder="MM"
+          placeholderTextColor="gray"
         />
       </View>
       <View style={styles.row}>
@@ -131,6 +133,7 @@ export function TimeInputScreen() {
           keyboardType="number-pad"
           maxLength={2}
           placeholder="HH"
+          placeholderTextColor="gray"
         />
         <Text style={styles.text}>:</Text>
         <TextInput
@@ -140,6 +143,7 @@ export function TimeInputScreen() {
           keyboardType="number-pad"
           maxLength={2}
           placeholder="MM"
+          placeholderTextColor="gray"
         />
       </View>
       {hasValidationErrors().length > 0 &&
