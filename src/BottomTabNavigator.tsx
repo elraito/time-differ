@@ -16,7 +16,7 @@ const TabNavigator = createBottomTabNavigator<RootStackParamList>();
 export function BottomTabNavigator() {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
-      <TabNavigator.Navigator tabBar={props => <BottomTabBar {...props} />}>
+      <TabNavigator.Navigator tabBar={props => <BottomTabBar {...props} />} screenOptions={{ headerShown: false }}>
         <TabNavigator.Screen
           name="TimeInput"
           component={TimeInputScreen}

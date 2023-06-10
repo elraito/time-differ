@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TimeContext } from '../TimeContext';
+import { HourglassBG } from '../components/HourglassBG';
+import { LargeText } from '../components/LargeText';
 
 export function TimeDiffDisplayScreen() {
   const { startTime, endTime } = useContext(TimeContext);
@@ -49,42 +49,15 @@ export function TimeDiffDisplayScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <BlackText>
-        {startTime.hours}:{startTime.minutes}
-      </BlackText>
-      <BlackText>
-        {endTime.hours}:{endTime.minutes}
-      </BlackText>
-      <BlackText>Daily time</BlackText>
-      <BlackText>
-        {dailyTime.hours}:{dailyTime.minutes}
-      </BlackText>
-      <BlackText>Nightly time</BlackText>
-      <BlackText>
-        {nightlyTime.hours}:{nightlyTime.minutes}
-      </BlackText>
-    </SafeAreaView>
+    <HourglassBG>
+      <LargeText>Daily time</LargeText>
+      <LargeText>
+        {dailyTime.hours} : {dailyTime.minutes}
+      </LargeText>
+      <LargeText>Nightly time</LargeText>
+      <LargeText>
+        {nightlyTime.hours} : {nightlyTime.minutes}
+      </LargeText>
+    </HourglassBG>
   );
 }
-
-interface BlackTextProps {
-  children: React.ReactNode;
-}
-
-function BlackText({ children }: BlackTextProps) {
-  return <Text style={styles.text}>{children}</Text>;
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
-  },
-  text: {
-    color: 'black',
-    fontSize: 36,
-  },
-});

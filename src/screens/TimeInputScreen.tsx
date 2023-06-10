@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { NativeSyntheticEvent, StyleSheet, Text, TextInput, TextInputChangeEventData, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TimeContext } from '../TimeContext';
+import { HourglassBG } from '../components/HourglassBG';
 
 interface ValidationErrors {
   [key: string]: undefined | string;
@@ -97,7 +97,7 @@ export function TimeInputScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <HourglassBG>
       <View style={styles.row}>
         <Text style={styles.text}>Starting time:</Text>
       </View>
@@ -152,7 +152,7 @@ export function TimeInputScreen() {
             <Text style={styles.errorMessage}>{e}</Text>
           </View>
         ))}
-    </SafeAreaView>
+    </HourglassBG>
   );
 }
 
