@@ -4,20 +4,26 @@ import { TimeDiffDisplayScreen } from './screens/TimeDiffDisplayScreen';
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import HourGlass from './svg/hourglass.svg';
 import InputIcon from './svg/input.svg';
+import { BottomTabBar } from './BottomTabBar';
 
-const TabNavigator = createBottomTabNavigator();
+export type RootStackParamList = {
+  TimeInput: undefined;
+  TimeDifference: undefined;
+};
+
+const TabNavigator = createBottomTabNavigator<RootStackParamList>();
 
 export function BottomTabNavigator() {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
-      <TabNavigator.Navigator>
+      <TabNavigator.Navigator tabBar={props => <BottomTabBar {...props} />}>
         <TabNavigator.Screen
-          name="Time Input"
+          name="TimeInput"
           component={TimeInputScreen}
           options={{ tabBarIcon: () => <InputIcon height={24} width={24} /> }}
         />
         <TabNavigator.Screen
-          name="Time Difference"
+          name="TimeDifference"
           component={TimeDiffDisplayScreen}
           options={{ tabBarIcon: () => <HourGlass height={24} width={24} /> }}
         />
