@@ -25,6 +25,9 @@ export function TimeInputScreen() {
       description,
     });
 
+    setStartDate(new Date('2023-10-10T06:00:00'));
+    setEndDate(new Date('2023-10-10T22:00:00'));
+
     setDescription('');
     navigate('TimeDifference');
   };
