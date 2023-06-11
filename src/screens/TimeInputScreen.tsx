@@ -47,6 +47,7 @@ export function TimeInputScreen() {
           locale="et"
           textColor={astroColors.black}
           fadeToColor={astroColors.transparent}
+          is24hourSource="locale"
         />
       </Row>
       <Row>
@@ -62,6 +63,7 @@ export function TimeInputScreen() {
           locale="et"
           textColor={astroColors.black}
           fadeToColor={astroColors.transparent}
+          is24hourSource="locale"
         />
       </Row>
       <Row>
