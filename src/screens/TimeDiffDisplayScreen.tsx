@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { TimeContext } from '../TimeContext';
 import { HourglassBG } from '../components/HourglassBG';
-import { LargeText } from '../components/LargeText';
+import { AstroText } from '../components/AstroText';
 
 export function TimeDiffDisplayScreen() {
   const { startTime, endTime } = useContext(TimeContext);
@@ -50,14 +50,14 @@ export function TimeDiffDisplayScreen() {
 
   return (
     <HourglassBG>
-      <LargeText>Daily time</LargeText>
-      <LargeText>
+      <AstroText>Päevane aeg</AstroText>
+      <AstroText>
         {dailyTime.hours} : {dailyTime.minutes}
-      </LargeText>
-      <LargeText>Nightly time</LargeText>
-      <LargeText>
+      </AstroText>
+      <AstroText>Öine aeg</AstroText>
+      <AstroText>
         {nightlyTime.hours} : {nightlyTime.minutes}
-      </LargeText>
+      </AstroText>
     </HourglassBG>
   );
 }

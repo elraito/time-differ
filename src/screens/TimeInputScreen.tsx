@@ -1,187 +1,76 @@
+import { useNavigation } from '@react-navigation/native';
 import { useContext, useState } from 'react';
-import { NativeSyntheticEvent, StyleSheet, Text, TextInput, TextInputChangeEventData, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import DatePicker from 'react-native-date-picker';
 import { TimeContext } from '../TimeContext';
+import { AstroText } from '../components/AstroText';
+import { DescriptionModal } from '../components/DescriptionModal';
 import { HourglassBG } from '../components/HourglassBG';
-
-interface ValidationErrors {
-  [key: string]: undefined | string;
-}
+import { PillButton } from '../components/PillButton';
+import { astroColors } from '../constants/colors';
+import { Row } from '../components/Row';
 
 export function TimeInputScreen() {
-  const { startTime, setStartTime, endTime, setEndTime } = useContext(TimeContext);
+  const { setStartTime, setEndTime } = useContext(TimeContext);
+  const { navigate } = useNavigation();
 
-  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
+  const [startDate, setStartDate] = useState(new Date('2023-10-10T06:00:00'));
+  const [endDate, setEndDate] = useState(new Date('2023-10-10T22:00:00'));
+  const [description, setDescription] = useState('');
 
-  const validateMinutes = (minutes: number) => {
-    if (isNaN(minutes)) {
-      return 'should be a number';
-    }
-
-    if ([0, 15, 30, 45].includes(minutes) && minutes <= 59) {
-      return true;
-    } else if (minutes > 59) {
-      return 'should be smaller than 60';
-    } else {
-      return 'should be one of 0, 15, 30, 45';
-    }
-  };
-
-  const validateHours = (hours: number) => {
-    if (isNaN(hours)) {
-      return 'should be a number';
-    }
-
-    if (hours >= 0 && hours <= 23) {
-      return true;
-    } else {
-      return 'should be between 0 and 23';
-    }
-  };
-
-  const handleStartHourChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    const hours = parseInt(e.nativeEvent.text, 10);
-    const hoursValidation = validateHours(hours);
-
-    if (hoursValidation === true) {
-      setStartTime(prev => ({ ...prev, hours }));
-      setValidationErrors(prev => ({ ...prev, startHours: undefined }));
-    } else {
-      setValidationErrors(prev => ({ ...prev, startHours: 'Starting hours ' + hoursValidation }));
-    }
-  };
-
-  const handleEndHourChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    const hours = parseInt(e.nativeEvent.text, 10);
-    const hoursValidation = validateHours(hours);
-
-    if (hoursValidation === true) {
-      setEndTime(prev => ({ ...prev, hours }));
-      setValidationErrors(prev => ({ ...prev, endHours: undefined }));
-    } else {
-      setValidationErrors(prev => ({ ...prev, endHours: 'Ending hours ' + hoursValidation }));
-    }
-  };
-
-  const handleStartMinuteChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    const minutes = parseInt(e.nativeEvent.text, 10);
-    const minutesValidation = validateMinutes(minutes);
-
-    if (minutesValidation === true) {
-      setStartTime(prev => ({ ...prev, minutes }));
-      setValidationErrors(prev => ({ ...prev, startMinutes: undefined }));
-    } else {
-      setValidationErrors(prev => ({ ...prev, startMinutes: 'Staring minutes ' + minutesValidation }));
-    }
-  };
-
-  const handleEndMinutesChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    const minutes = parseInt(e.nativeEvent.text, 10);
-    const minutesValidation = validateMinutes(minutes);
-
-    if (minutesValidation === true) {
-      setEndTime(prev => ({ ...prev, minutes }));
-      setValidationErrors(prev => ({ ...prev, endMinutes: undefined }));
-    } else {
-      setValidationErrors(prev => ({ ...prev, endMinutes: 'Ending minutes ' + minutesValidation }));
-    }
-  };
-
-  const hasValidationErrors = () => {
-    let errors: string[] = [];
-    for (const key in validationErrors) {
-      if (validationErrors[key]) {
-        errors.push(validationErrors[key]!);
-      }
-    }
-    return errors.length > 0 ? errors : [];
+  const handleSubmit = () => {
+    console.log(description);
+    setStartTime({ hours: startDate.getHours(), minutes: startDate.getMinutes() });
+    setEndTime({ hours: endDate.getHours(), minutes: endDate.getMinutes() });
+    setDescription('');
+    navigate('TimeDifference');
   };
 
   return (
-    <HourglassBG>
-      <View style={styles.row}>
-        <Text style={styles.text}>Starting time:</Text>
-      </View>
-      <View style={styles.row}>
-        <TextInput
-          style={styles.input}
-          defaultValue={startTime.hours.toString()}
-          onChange={handleStartHourChange}
-          keyboardType="number-pad"
-          maxLength={2}
-          placeholder="HH"
-          placeholderTextColor="gray"
+    <HourglassBG style={styles.container}>
+      <Row>
+        <AstroText large>Töö algus:</AstroText>
+      </Row>
+      <Row>
+        <DatePicker
+          style={styles.timePicker}
+          date={startDate}
+          onDateChange={setStartDate}
+          minuteInterval={15}
+          mode="time"
+          locale="et"
+          textColor={astroColors.black}
+          fadeToColor={astroColors.transparent}
         />
-        <Text style={styles.text}>:</Text>
-        <TextInput
-          style={styles.input}
-          defaultValue={startTime.minutes.toString()}
-          onChange={handleStartMinuteChange}
-          keyboardType="number-pad"
-          maxLength={2}
-          placeholder="MM"
-          placeholderTextColor="gray"
+      </Row>
+      <Row>
+        <AstroText large>Töö lõpp:</AstroText>
+      </Row>
+      <Row>
+        <DatePicker
+          style={styles.timePicker}
+          date={endDate}
+          onDateChange={setEndDate}
+          minuteInterval={15}
+          mode="time"
+          locale="et"
+          textColor={astroColors.black}
+          fadeToColor={astroColors.transparent}
         />
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.text}>Ending time:</Text>
-      </View>
-      <View style={styles.row}>
-        <TextInput
-          style={styles.input}
-          defaultValue={endTime.hours.toString()}
-          onChange={handleEndHourChange}
-          keyboardType="number-pad"
-          maxLength={2}
-          placeholder="HH"
-          placeholderTextColor="gray"
-        />
-        <Text style={styles.text}>:</Text>
-        <TextInput
-          style={styles.input}
-          defaultValue={endTime.minutes.toString()}
-          onChange={handleEndMinutesChange}
-          keyboardType="number-pad"
-          maxLength={2}
-          placeholder="MM"
-          placeholderTextColor="gray"
-        />
-      </View>
-      {hasValidationErrors().length > 0 &&
-        hasValidationErrors().map((e, i) => (
-          <View style={styles.row} key={i}>
-            <Text style={styles.errorMessage}>{e}</Text>
-          </View>
-        ))}
+      </Row>
+      <Row>
+        <DescriptionModal submitText={setDescription} />
+        <PillButton onPress={handleSubmit} text="Kinnita" />
+      </Row>
     </HourglassBG>
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     gap: 8,
   },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-  errorMessage: {
-    color: 'red',
-  },
-  text: {
-    color: 'black',
-    fontSize: 36,
-  },
-  input: {
-    color: 'black',
-    fontSize: 36,
-    margin: 0,
-    padding: 0,
-    alignItems: 'center',
-    textAlign: 'center',
+  timePicker: {
+    height: 96,
   },
 });
