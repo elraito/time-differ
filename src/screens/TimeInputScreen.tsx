@@ -11,7 +11,7 @@ import { astroColors } from '../constants/colors';
 import { Row } from '../components/Row';
 
 export function TimeInputScreen() {
-  const { addTimeEntry, timeEntries } = useContext(TimeContext);
+  const { addTimeEntry } = useContext(TimeContext);
   const { navigate } = useNavigation();
 
   const [startDate, setStartDate] = useState(new Date('2023-10-10T06:00:00'));
@@ -28,8 +28,6 @@ export function TimeInputScreen() {
     setDescription('');
     navigate('TimeDifference');
   };
-
-  console.log(timeEntries);
 
   return (
     <HourglassBG style={styles.container}>
