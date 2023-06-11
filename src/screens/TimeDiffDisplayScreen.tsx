@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { TimeContext } from '../TimeContext';
 import { HourglassBG } from '../components/HourglassBG';
 import { AstroText } from '../components/AstroText';
-import { FlatList, Platform, Pressable, StyleSheet, View } from 'react-native';
+import { FlatList, LayoutRectangle, Pressable, StyleSheet, View } from 'react-native';
 import { Row } from '../components/Row';
 import MoonIcon from '../svg/moon.svg';
 import SunIcon from '../svg/sun.svg';
@@ -11,15 +11,20 @@ import { astroColors } from '../constants/colors';
 
 export function TimeDiffDisplayScreen() {
   const { timeEntries, deleteEntry } = useContext(TimeContext);
+  const [layout, setLayout] = useState<LayoutRectangle | undefined>();
+  const isLandScape = layout?.width ? layout.width > layout.height : true;
 
   return (
-    <HourglassBG style={styles.container}>
+    <HourglassBG style={styles.container} onLayout={e => setLayout(e.nativeEvent.layout)}>
       {timeEntries.length === 0 ? (
         <Row>
           <AstroText>Sul ei ole sissekandeid.</AstroText>
         </Row>
       ) : (
         <FlatList
+          numColumns={isLandScape ? 2 : 1}
+          key={isLandScape ? 2 : 1}
+          columnWrapperStyle={isLandScape && styles.columnWrapperStyle}
           data={timeEntries}
           contentContainerStyle={styles.listContainer}
           renderItem={({ item, index }) => (
@@ -84,7 +89,7 @@ export function TimeDiffDisplayScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: Platform.OS === 'ios' ? 48 : 96,
+    paddingBottom: 48,
     paddingTop: 48,
   },
   listContainer: {
@@ -149,5 +154,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 280,
     padding: 4,
+  },
+  columnWrapperStyle: {
+    gap: 12,
   },
 });
